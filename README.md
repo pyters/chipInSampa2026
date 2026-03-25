@@ -1,4 +1,4 @@
-# Project Description: Chip in Sampa 2026
+# Project: Chip in Sampa 2026
 
 ## 1. Small Signals Analysis (`2 scripts/1_small_signals.py`)
 
@@ -125,3 +125,35 @@ This script performs a comprehensive analysis of circuit performance across proc
 - **Advanced ASCII Reporting**:
   - `Section 1`: Captures process variations (SS, FS, SF, FF) specifically under nominal conditions (27ºC, 2.5V) for modes `01`, `10`, and `11`.
   - `Section 2`: Identifies the absolute minimum, maximum, and total range for each metric across all 16 PVT corners, providing separate columns for the specific condition (**T**, **V**, and **P**) where each extreme was detected.
+
+---
+
+## 5. Monte Carlo Analysis (`2 scripts/5_large_signals_MC.py`)
+
+This script performs a statistical evaluation of the Power Amplifier performance across 500 Monte Carlo iterations for three operational modes (`01`, `10`, and `11`). It generates probability density distributions and calculates detailed statistical metrics.
+
+**Input Files**:
+
+Requires `.csv` files containing Monte Carlo simulation results (exported from Virtuoso/Spectre). The script expects one file per operational mode.
+
+- Directory: `1 raw results/5 large signals MC/`
+
+**Output Files**:
+
+- `.png`: High-resolution histograms and PDF (KDE) curves.
+  - `Monte_Carlo_Metrics_Histogram.png`: A consolidated 2x2 grid for all metrics.
+  - Individual metric plots: `Monte_Carlo_Linear_Gain_dB.png`, `Monte_Carlo_OCP1dBm_dBm.png`, `Monte_Carlo_Peak_PAE_pct.png`, and `Monte_Carlo_PAE_at_OCP1dBm_pct.png`.
+- `.txt`: Formatted ASCII report (`Monte_Carlo_Statistics_Report.txt`) containing the statistical summary (Min, Max, Avg, Median, Std Dev) for each mode and metric.
+
+- Directory: `3 outputs/5 large signals MC/`
+
+### Monte Carlo Features & Capabilities
+
+- **Statistical Distribution Analysis**: Uses Gaussian Kernel Density Estimation (KDE) to overlay smooth probability density curves on top of histograms, providing a clearer view of the performance distribution.
+- **Multi-Metric Evaluation**: Tracks four critical indicators:
+  - **Linear Gain (dB)**
+  - **OCP1dBm (dBm)**
+  - **Peak PAE (%)**
+  - **PAE @ OCP1dBm (%)**
+- **Comparative Mode Analysis**: Overlaps distributions for all three modes using consistent color coding, allowing direct visual comparison of statistical stability and performance trade-offs.
+- **Comprehensive Reporting**: Generates a detailed statistical summary table, highlighting the robustness of the design against manufacturing process variations and mismatch.
