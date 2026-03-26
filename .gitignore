@@ -22,7 +22,6 @@ wheels/
 *.egg
 
 # Data/Simulation results
-*.vcsv
 *.log
 *.pva
 
